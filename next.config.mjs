@@ -4,6 +4,14 @@ const nextConfig = {
   // https://github.com/WalletConnect/walletconnect-monorepo/issues/1908
   webpack: (config) => {
     config.externals.push("pino-pretty", "lokijs", "encoding");
+
+    // 👇 Agregamos esta regla para tratar HeartbeatWorker.js como módulo ESM
+    config.module.rules.push({
+      test: /HeartbeatWorker\.js$/,
+      issuer: /\.[jt]sx?$/,
+      type: 'javascript/esm',
+    });
+
     return config;
   },
 };
