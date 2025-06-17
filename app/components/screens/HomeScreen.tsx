@@ -20,7 +20,7 @@ export default function HomePage({ onNavigate }: Props) {
                 <span>•</span>
                 <span>Technology</span>
               </div>
-              <span>April 24, 2024</span>
+                <span>{new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span>
             </div>
             <hr className="border-gray-400 mb-6" />
           </div>
