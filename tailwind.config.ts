@@ -13,9 +13,14 @@ const config: Config = {
         foreground: "var(--foreground)",
       },
       animation: {
-        "fade-out": "1s fadeOut 3s ease-out forwards",
+        "screen-fade-in": "fadeIn 0.3s ease-out forwards",
+        "screen-fade-out": "fadeOut 0.5s ease-in forwards",
       },
       keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
         fadeOut: {
           "0%": { opacity: "1" },
           "100%": { opacity: "0" },

@@ -15,12 +15,20 @@ export default function Page() {
   }, [setFrameReady, isFrameReady])
 
   const [currentScreen, setCurrentScreen] = useState("home");
-  const handleNavigate = (screen: string) => setCurrentScreen(screen);
+  const [hasNavigated, setHasNavigated] = useState(false);
+  const handleNavigate = (screen: string) => {
+    if (!hasNavigated) setHasNavigated(true);
+    setCurrentScreen(screen);
+  };
 
   return (
-    <>
-      {currentScreen === "home" && <HomeScreen onNavigate={handleNavigate} />}
-      {currentScreen === "settings" && <SettingsScreen onNavigate={handleNavigate} />}
-    </>
+    <div className="relative">
+      <div className={`absolute inset-0 ${!hasNavigated ? (currentScreen === "home" ? "opacity-100" : "opacity-0 pointer-events-none") : (currentScreen === "home" ? "animate-screen-fade-in" : "animate-screen-fade-out pointer-events-none")}`}>
+        <HomeScreen onNavigate={handleNavigate} />
+      </div>
+      <div className={`absolute inset-0 ${!hasNavigated ? (currentScreen === "settings" ? "opacity-100" : "opacity-0 pointer-events-none") : (currentScreen === "settings" ? "animate-screen-fade-in" : "animate-screen-fade-out pointer-events-none")}`}>
+        <SettingsScreen onNavigate={handleNavigate} />
+      </div>
+    </div>
   );
 }
